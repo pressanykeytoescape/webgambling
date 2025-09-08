@@ -1,0 +1,190 @@
+/* 3D Reel Enhanced Styles */
+
+.reel-3d {
+  position: relative;
+  width: 120px;
+  height: 200px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.reel-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border-radius: 15px;
+  border: 3px solid #444;
+  overflow: hidden;
+  box-shadow: 
+    inset 0 0 20px rgba(0, 0, 0, 0.5),
+    0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.reel-symbols {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  top: 0;
+  left: 0;
+  transition: transform 0.1s ease-out;
+}
+
+.reel-symbols.animate {
+  animation: reel-spin 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes reel-spin {
+  0% { transform: translateY(0); }
+  20% { transform: translateY(-200px) rotateX(10deg); }
+  50% { transform: translateY(-800px) rotateX(0deg); }
+  80% { transform: translateY(-1200px) rotateX(-5deg); }
+  100% { transform: translateY(-1600px) rotateX(0deg); }
+}
+
+.symbol-row {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent);
+}
+
+.symbol-row.highlight {
+  background: linear-gradient(145deg, #ffd700, #ff8c00);
+  box-shadow: 
+    0 0 20px rgba(255, 215, 0, 0.8),
+    inset 0 0 10px rgba(255, 255, 255, 0.3);
+  animation: symbol-glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes symbol-glow {
+  0% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.3); }
+  100% { box-shadow: 0 0 30px rgba(255, 215, 0, 1), inset 0 0 15px rgba(255, 255, 255, 0.5); }
+}
+
+.symbol-content {
+  font-size: 2.5rem;
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 10px rgba(255, 255, 255, 0.3);
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3));
+  transition: all 0.3s ease;
+}
+
+.symbol-row.highlight .symbol-content {
+  transform: scale(1.1);
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+.reel-frame-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    transparent 25%,
+    transparent 75%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.reel-frame-overlay::before {
+  content: '';
+  position: absolute;
+  top: 25%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffd700, transparent);
+  box-shadow: 0 0 10px #ffd700;
+}
+
+.reel-frame-overlay::after {
+  content: '';
+  position: absolute;
+  bottom: 25%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffd700, transparent);
+  box-shadow: 0 0 10px #ffd700;
+}
+
+.winning-line {
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  right: -10px;
+  height: 4px;
+  background: linear-gradient(90deg, #ff0080, #ffd700, #ff0080);
+  transform: translateY(-50%);
+  z-index: 3;
+  animation: winning-line-pulse 1s ease-in-out infinite;
+  box-shadow: 
+    0 0 20px #ffd700,
+    0 0 40px #ff0080;
+}
+
+@keyframes winning-line-pulse {
+  0%, 100% { opacity: 1; transform: translateY(-50%) scaleX(1); }
+  50% { opacity: 0.7; transform: translateY(-50%) scaleX(1.1); }
+}
+
+.reel-glow {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
+  border-radius: 20px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: reel-glow-rotate 3s linear infinite;
+}
+
+.reel-glow.active {
+  opacity: 0.6;
+}
+
+@keyframes reel-glow-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.reel-3d.spinning {
+  animation: reel-shake 0.1s ease-in-out infinite;
+}
+
+@keyframes reel-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .reel-3d {
+    width: 80px;
+    height: 150px;
+  }
+  
+  .symbol-row {
+    height: 45px;
+  }
+  
+  .symbol-content {
+    font-size: 2rem;
+  }
+}

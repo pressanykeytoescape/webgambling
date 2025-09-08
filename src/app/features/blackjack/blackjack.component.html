@@ -1,0 +1,157 @@
+<div class="blackjack-table min-h-screen bg-gradient-to-br from-green-900 via-emerald-800 to-green-900 relative overflow-hidden">
+  <!-- Casino atmosphere particles -->
+  <div class="absolute inset-0">
+    <div class="bj-particle" *ngFor="let i of [].constructor(12); let idx = index" 
+         [style.left.%]="(idx * 8) % 100" 
+         [style.animation-delay.s]="idx * 0.4">
+    </div>
+  </div>
+  
+  <div class="container mx-auto p-4 flex flex-col items-center space-y-8 relative z-10">
+    <!-- Blackjack title -->
+    <div class="text-center">
+      <h1 class="bj-title text-6xl font-bold mb-4">🃏 BLACKJACK 21 🃏</h1>
+      <div class="text-xl text-green-300 animate-pulse">♠️ Beat the Dealer! ♠️</div>
+    </div>
+
+    <!-- Casino table -->
+    <div class="casino-table">
+      <!-- Table felt background -->
+      <div class="table-felt">
+        <!-- Dealer section -->
+        <div class="dealer-section">
+          <div class="dealer-label">
+            <span class="dealer-text">🎩 DEALER</span>
+            <div class="dealer-score" *ngIf="gameState === 'finished'">
+              Score: {{ getDealerScore() }}
+            </div>
+          </div>
+          
+          <div class="card-area dealer-cards">
+            <div 
+              *ngFor="let card of dealerHand; let i = index"
+              class="playing-card dealer-card"
+              [class.face-down]="i === 1 && gameState === 'playing'"
+              [style.animation-delay.ms]="i * 200"
+              [style.z-index]="10 + i">
+              
+              <div class="card-inner" [class.flipped]="!(i === 1 && gameState === 'playing')">
+                <div class="card-front">
+                  <div class="card-content">
+                    <div class="card-rank">{{ card.rank }}</div>
+                    <div class="card-suit" [class]="getSuitClass(card.suit)">{{ getSuitSymbol(card.suit) }}</div>
+                  </div>
+                </div>
+                <div class="card-back">
+                  <div class="card-pattern"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Player section -->
+        <div class="player-section">
+          <div class="player-label">
+            <span class="player-text">👤 PLAYER</span>
+            <div class="player-score">
+              Score: {{ getPlayerScore() }}
+            </div>
+          </div>
+          
+          <div class="card-area player-cards">
+            <div 
+              *ngFor="let card of playerHand; let i = index"
+              class="playing-card player-card"
+              [style.animation-delay.ms]="i * 300"
+              [style.z-index]="20 + i">
+              
+              <div class="card-inner flipped">
+                <div class="card-front">
+                  <div class="card-content">
+                    <div class="card-rank">{{ card.rank }}</div>
+                    <div class="card-suit" [class]="getSuitClass(card.suit)">{{ getSuitSymbol(card.suit) }}</div>
+                  </div>
+                </div>
+                <div class="card-back">
+                  <div class="card-pattern"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Control panel -->
+    <div class="control-panel-bj">
+      <!-- Bet controls -->
+      <div class="bet-section">
+        <label class="bet-label">💰 BET AMOUNT</label>
+        <div class="bet-controls-bj">
+          <button (click)="decreaseBet()" [disabled]="gameState === 'playing'" class="bet-btn-bj minus">-</button>
+          <input
+            id="bjBet"
+            type="number"
+            [(ngModel)]="bet"
+            [min]="minBet"
+            [max]="maxBet"
+            class="bet-input-bj"
+            [disabled]="gameState === 'playing'"
+          />
+          <button (click)="increaseBet()" [disabled]="gameState === 'playing'" class="bet-btn-bj plus">+</button>
+        </div>
+      </div>
+      
+      <!-- Action buttons -->
+      <div class="action-buttons">
+        <button
+          (click)="deal()"
+          [disabled]="gameState === 'playing'"
+          class="action-btn deal-btn"
+          [class.pulse]="gameState === 'init' || gameState === 'finished'"
+        >
+          <span class="btn-icon">🎴</span>
+          <span class="btn-text">DEAL</span>
+        </button>
+        
+        <button
+          (click)="hit()"
+          [disabled]="gameState !== 'playing'"
+          class="action-btn hit-btn"
+        >
+          <span class="btn-icon">➕</span>
+          <span class="btn-text">HIT</span>
+        </button>
+        
+        <button
+          (click)="stand()"
+          [disabled]="gameState !== 'playing'"
+          class="action-btn stand-btn"
+        >
+          <span class="btn-icon">✋</span>
+          <span class="btn-text">STAND</span>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Result display -->
+    <div class="result-display" *ngIf="resultMessage">
+      <div class="result-content" [class]="getResultClass()">
+        <div class="result-text">{{ resultMessage }}</div>
+        <div class="result-animation" *ngIf="isWinning()">🎉</div>
+      </div>
+    </div>
+    
+    <!-- Game info -->
+    <div class="game-info-bj">
+      <div class="balance-display-bj">
+        <span class="balance-label-bj">Balance:</span>
+        <span class="balance-amount-bj">${{ (balance$ | async) ?? 0 }}</span>
+      </div>
+      
+      <a routerLink="/lobby" class="back-button-bj">
+        🏠 Back to Lobby
+      </a>
+    </div>
+  </div>
+</div>

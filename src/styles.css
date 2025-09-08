@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom global styles */
+body {
+  @apply bg-gradient-to-br from-green-800 via-black to-purple-900 text-gray-100;
+  font-family: sans-serif;
+  min-height: 100vh;
+}

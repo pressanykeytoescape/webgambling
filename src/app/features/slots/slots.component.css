@@ -1,0 +1,407 @@
+/* Styling for the slots component */
+.container {
+  min-height: calc(100vh - 4rem);
+}
+
+/* 3D Slot Machine Enhanced Styles */
+
+/* Background particles */
+.slot-bg-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #3b82f6, #1e40af);
+  border-radius: 50%;
+  animation: slot-float 8s ease-in-out infinite;
+  box-shadow: 0 0 15px #3b82f6;
+}
+
+@keyframes slot-float {
+  0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-20px) rotate(360deg); opacity: 0; }
+}
+
+/* Slot machine title */
+.slot-title {
+  color: #fff;
+  text-shadow: 
+    0 0 10px #3b82f6,
+    0 0 20px #3b82f6,
+    0 0 30px #3b82f6,
+    0 0 40px #1e40af;
+  animation: slot-title-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes slot-title-glow {
+  0% { text-shadow: 0 0 10px #3b82f6, 0 0 20px #3b82f6, 0 0 30px #3b82f6; }
+  100% { text-shadow: 0 0 20px #3b82f6, 0 0 30px #3b82f6, 0 0 40px #3b82f6, 0 0 50px #1e40af; }
+}
+
+/* 3D Slot Machine Frame */
+.slot-machine-frame {
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border-radius: 30px;
+  padding: 2rem;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 4px solid #444;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.slot-machine-frame::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: linear-gradient(45deg, #ffd700, #ff8c00, #ff0080, #3b82f6);
+  border-radius: 30px;
+  z-index: -1;
+  animation: machine-border-glow 3s linear infinite;
+}
+
+@keyframes machine-border-glow {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* Machine top with lights */
+.machine-top {
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.top-lights {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.light {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffd700, #ff8c00);
+  box-shadow: 0 0 20px #ffd700;
+  animation: light-blink 2s ease-in-out infinite;
+}
+
+@keyframes light-blink {
+  0%, 50% { opacity: 1; transform: scale(1); }
+  25%, 75% { opacity: 0.3; transform: scale(0.8); }
+}
+
+.machine-logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffd700;
+  text-shadow: 0 0 20px #ffd700;
+  letter-spacing: 0.2em;
+}
+
+/* Reels container */
+.reels-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 2rem 0;
+  padding: 1rem;
+  background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+  border-radius: 15px;
+  border: 2px solid #333;
+}
+
+.reels-container.spinning {
+  box-shadow: 
+    0 0 30px rgba(59, 130, 246, 0.5),
+    inset 0 0 20px rgba(59, 130, 246, 0.1);
+}
+
+.reel-frame {
+  background: linear-gradient(145deg, #333, #222);
+  border-radius: 10px;
+  padding: 0.5rem;
+  border: 2px solid #555;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Payout display */
+.payout-display {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.display-screen {
+  background: linear-gradient(145deg, #0a0a0a, #1a1a1a);
+  border: 3px solid #333;
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+.display-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: screen-scan 3s linear infinite;
+}
+
+@keyframes screen-scan {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.display-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00ff00;
+  text-shadow: 0 0 10px #00ff00;
+  font-family: 'Courier New', monospace;
+  position: relative;
+  z-index: 1;
+}
+
+/* Control panel */
+.control-panel {
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border-radius: 15px;
+  padding: 2rem;
+  border: 2px solid #444;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.bet-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.control-label {
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-shadow: 0 0 10px #ffd700;
+}
+
+.bet-input-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bet-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #ffd700;
+  background: linear-gradient(145deg, #333, #222);
+  color: #ffd700;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bet-btn:hover:not(:disabled) {
+  background: linear-gradient(145deg, #ffd700, #ff8c00);
+  color: #000;
+  box-shadow: 0 0 20px #ffd700;
+  transform: scale(1.1);
+}
+
+.bet-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bet-input {
+  width: 80px;
+  padding: 0.5rem;
+  text-align: center;
+  background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+  border: 2px solid #333;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Spin button */
+.spin-button {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ff0080, #ff8c00);
+  border: 4px solid #ffd700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 10px 30px rgba(255, 0, 128, 0.3),
+    0 0 0 0 rgba(255, 215, 0, 0.7);
+  animation: spin-button-pulse 2s ease-in-out infinite;
+}
+
+@keyframes spin-button-pulse {
+  0% { box-shadow: 0 10px 30px rgba(255, 0, 128, 0.3), 0 0 0 0 rgba(255, 215, 0, 0.7); }
+  50% { box-shadow: 0 10px 30px rgba(255, 0, 128, 0.5), 0 0 0 10px rgba(255, 215, 0, 0); }
+  100% { box-shadow: 0 10px 30px rgba(255, 0, 128, 0.3), 0 0 0 0 rgba(255, 215, 0, 0.7); }
+}
+
+.spin-button:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 
+    0 15px 40px rgba(255, 0, 128, 0.5),
+    0 0 30px rgba(255, 215, 0, 0.8);
+}
+
+.spin-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  animation: none;
+}
+
+.spin-button.spinning {
+  animation: spin-button-rotate 1s linear infinite;
+}
+
+@keyframes spin-button-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin-button-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.spin-text {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.spin-icon {
+  font-size: 2rem;
+}
+
+/* Machine base */
+.machine-base {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1rem;
+  background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+  border-radius: 15px;
+  border: 2px solid #333;
+}
+
+.coin-slot {
+  font-size: 2rem;
+  color: #ffd700;
+  text-shadow: 0 0 20px #ffd700;
+  animation: coin-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes coin-glow {
+  0% { text-shadow: 0 0 20px #ffd700; }
+  100% { text-shadow: 0 0 30px #ffd700, 0 0 40px #ff8c00; }
+}
+
+/* Game info */
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 2rem;
+}
+
+.balance-display {
+  background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+  border: 2px solid #ffd700;
+  border-radius: 15px;
+  padding: 1rem 2rem;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.balance-label {
+  color: #ffd700;
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.balance-amount {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+}
+
+.back-button {
+  background: linear-gradient(145deg, #333, #222);
+  border: 2px solid #666;
+  border-radius: 15px;
+  padding: 1rem 2rem;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.back-button:hover {
+  background: linear-gradient(145deg, #555, #333);
+  border-color: #ffd700;
+  color: #ffd700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .slot-machine-frame {
+    padding: 1rem;
+  }
+  
+  .reels-container {
+    gap: 0.5rem;
+  }
+  
+  .control-panel {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .spin-button {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .game-info {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

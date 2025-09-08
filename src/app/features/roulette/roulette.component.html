@@ -1,0 +1,204 @@
+<div class="roulette-container">
+  <!-- Background particles -->
+  <div class="roulette-particles">
+    <div class="roulette-particle" *ngFor="let particle of particles" 
+         [style.left.px]="particle.x" 
+         [style.animation-delay.s]="particle.delay">
+    </div>
+  </div>
+
+  <!-- Roulette title -->
+  <h1 class="roulette-title text-6xl font-bold text-center mb-8">
+    🎰 ROULETTE 🎰
+  </h1>
+
+  <!-- Main roulette table -->
+  <div class="roulette-table">
+    <!-- Roulette wheel section -->
+    <div class="wheel-section">
+      <div class="wheel-container">
+        <!-- Wheel base -->
+        <div class="wheel-base">
+          <!-- Outer rim -->
+          <div class="wheel-outer-rim"></div>
+          
+          <!-- Spinning wheel -->
+          <div class="roulette-wheel" [class.spinning]="spinning">
+            <!-- Numbers around the wheel -->
+            <div class="wheel-numbers">
+              <div *ngFor="let number of wheelNumbers; let i = index" 
+                   class="wheel-number"
+                   [class.red]="isRedNumber(number)"
+                   [class.black]="isBlackNumber(number)"
+                   [class.green]="number === 0"
+                   [class.winning]="winningNumber === number"
+                   [style.transform]="'rotate(' + (i * (360 / wheelNumbers.length)) + 'deg)'">
+                <span class="number-text">{{ number }}</span>
+              </div>
+            </div>
+            
+            <!-- Wheel center -->
+            <div class="wheel-center">
+              <div class="center-logo">🎲</div>
+            </div>
+          </div>
+          
+          <!-- Ball -->
+          <div class="roulette-ball" [class.spinning]="spinning" [class.landed]="ballLanded">
+            <div class="ball-inner"></div>
+          </div>
+          
+          <!-- Wheel pointer -->
+          <div class="wheel-pointer"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Betting board -->
+    <div class="betting-board">
+      <div class="betting-grid">
+        <!-- Number grid -->
+        <div class="number-grid">
+          <!-- Zero -->
+          <div class="bet-cell zero-cell" 
+               [class.selected]="betType === 'number' && betValue === 0"
+               (click)="selectNumberBet(0)">
+            0
+          </div>
+          
+          <!-- Numbers 1-36 -->
+          <div *ngFor="let num of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]" 
+               class="bet-cell number-cell"
+               [class.red]="isRedNumber(num)"
+               [class.black]="isBlackNumber(num)"
+               [class.selected]="betType === 'number' && betValue === num"
+               [class.winning]="winningNumber === num"
+               (click)="selectNumberBet(num)">
+            {{ num }}
+          </div>
+        </div>
+        
+        <!-- Outside bets -->
+        <div class="outside-bets">
+          <div class="bet-row">
+            <div class="bet-cell outside-bet red-bet" 
+                 [class.selected]="betType === 'color' && betValue === 'red'"
+                 (click)="selectColorBet('red')">
+              <span class="bet-icon">♦</span>
+              <span>ROT</span>
+            </div>
+            <div class="bet-cell outside-bet black-bet" 
+                 [class.selected]="betType === 'color' && betValue === 'black'"
+                 (click)="selectColorBet('black')">
+              <span class="bet-icon">♠</span>
+              <span>SCHWARZ</span>
+            </div>
+          </div>
+          
+          <div class="bet-row">
+            <div class="bet-cell outside-bet" 
+                 [class.selected]="betType === 'even'"
+                 (click)="selectBetType('even')">
+              GERADE
+            </div>
+            <div class="bet-cell outside-bet" 
+                 [class.selected]="betType === 'odd'"
+                 (click)="selectBetType('odd')">
+              UNGERADE
+            </div>
+          </div>
+          
+          <div class="bet-row">
+            <div class="bet-cell outside-bet dozen-bet" 
+                 [class.selected]="betType === 'dozen1'"
+                 (click)="selectBetType('dozen1')">
+              1-12
+            </div>
+            <div class="bet-cell outside-bet dozen-bet" 
+                 [class.selected]="betType === 'dozen2'"
+                 (click)="selectBetType('dozen2')">
+              13-24
+            </div>
+            <div class="bet-cell outside-bet dozen-bet" 
+                 [class.selected]="betType === 'dozen3'"
+                 (click)="selectBetType('dozen3')">
+              25-36
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Control panel -->
+  <div class="roulette-controls">
+    <!-- Bet controls -->
+    <div class="bet-section-roulette">
+      <div class="bet-label-roulette">EINSATZ</div>
+      <div class="bet-controls-roulette">
+        <button class="bet-btn-roulette" 
+                (click)="decreaseBet()" 
+                [disabled]="spinning || bet <= minBet">
+          -
+        </button>
+        <input class="bet-input-roulette" 
+               [(ngModel)]="bet" 
+               [min]="minBet" 
+               [max]="maxBet" 
+               type="number"
+               [disabled]="spinning">
+        <button class="bet-btn-roulette" 
+                (click)="increaseBet()" 
+                [disabled]="spinning || bet >= maxBet">
+          +
+        </button>
+      </div>
+    </div>
+
+    <!-- Spin button -->
+    <button class="spin-btn-roulette" 
+            [class.pulse]="!spinning && betType"
+            [disabled]="spinning || !betType"
+            (click)="spin()">
+      <div class="btn-icon-roulette">🎯</div>
+      <div class="btn-text-roulette">{{ spinning ? 'SPINNING...' : 'SPIN' }}</div>
+    </button>
+
+    <!-- Clear bets -->
+    <button class="clear-btn-roulette" 
+            [disabled]="spinning"
+            (click)="clearBets()">
+      <div class="btn-icon-roulette">🗑️</div>
+      <div class="btn-text-roulette">CLEAR</div>
+    </button>
+  </div>
+
+  <!-- Result display -->
+  <div class="result-display-roulette" *ngIf="resultMessage">
+    <div class="result-content-roulette" [class]="getResultClass()">
+      <div class="result-animation-roulette" *ngIf="isWinning()">🎉</div>
+      <div class="result-text-roulette">{{ resultMessage }}</div>
+      <div class="winning-number-display" *ngIf="winningNumber !== null">
+        <span class="winning-label">Winning Number:</span>
+        <span class="winning-number" 
+              [class.red]="isRedNumber(winningNumber!)"
+              [class.black]="isBlackNumber(winningNumber!)"
+              [class.green]="winningNumber === 0">
+          {{ winningNumber }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game info -->
+  <div class="game-info-roulette">
+    <div class="balance-display-roulette">
+      <span class="balance-label-roulette">BALANCE:</span>
+      <span class="balance-amount-roulette">{{ balance$ | async }}€</span>
+    </div>
+    
+    <a routerLink="/lobby" class="back-button-roulette">
+      ← ZURÜCK ZUR LOBBY
+    </a>
+  </div>
+</div>

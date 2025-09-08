@@ -1,0 +1,93 @@
+<div class="slot-machine-container min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 relative overflow-hidden">
+  <!-- Animated background -->
+  <div class="absolute inset-0">
+    <div class="slot-bg-particle" *ngFor="let i of [].constructor(15); let idx = index" 
+         [style.left.%]="(idx * 7) % 100" 
+         [style.animation-delay.s]="idx * 0.3">
+    </div>
+  </div>
+  
+  <div class="container mx-auto p-4 flex flex-col items-center space-y-8 relative z-10">
+    <!-- Slot machine title with neon effect -->
+    <div class="text-center">
+      <h1 class="slot-title text-6xl font-bold mb-4">🎰 LUCKY SLOTS 🎰</h1>
+      <div class="text-xl text-yellow-300 animate-pulse">💎 Spin Your Way to Fortune! 💎</div>
+    </div>
+
+    <!-- 3D Slot Machine Frame -->
+    <div class="slot-machine-frame">
+      <!-- Machine top with lights -->
+      <div class="machine-top">
+        <div class="top-lights">
+          <div class="light" *ngFor="let i of [].constructor(8); let idx = index" 
+               [style.animation-delay.s]="idx * 0.2"></div>
+        </div>
+        <div class="machine-logo">JACKPOT</div>
+      </div>
+      
+      <!-- Reels container -->
+      <div class="reels-container" [class.spinning]="spinning">
+        <div class="reel-frame" *ngFor="let column of reels; let i = index">
+          <app-reel [symbols]="column" [spinning]="spinning" [reelIndex]="i"></app-reel>
+        </div>
+      </div>
+      
+      <!-- Payout display -->
+      <div class="payout-display">
+        <div class="display-screen">
+          <div class="display-text">{{ lastPayout > 0 ? 'WIN: $' + lastPayout : 'GOOD LUCK!' }}</div>
+        </div>
+      </div>
+      
+      <!-- Control panel -->
+      <div class="control-panel">
+        <div class="bet-controls">
+          <label class="control-label">💰 BET AMOUNT</label>
+          <div class="bet-input-container">
+            <button (click)="decreaseBet()" [disabled]="spinning" class="bet-btn minus-btn">-</button>
+            <input
+              id="bet"
+              type="number"
+              [(ngModel)]="bet"
+              [min]="minBet"
+              [max]="maxBet"
+              class="bet-input"
+              [disabled]="spinning"
+            />
+            <button (click)="increaseBet()" [disabled]="spinning" class="bet-btn plus-btn">+</button>
+          </div>
+        </div>
+        
+        <!-- Spin button -->
+        <button
+          (click)="spin()"
+          [disabled]="spinning"
+          class="spin-button"
+          [class.spinning]="spinning"
+        >
+          <div class="spin-button-inner">
+            <div class="spin-text">{{ spinning ? 'SPINNING...' : 'SPIN!' }}</div>
+            <div class="spin-icon">🎰</div>
+          </div>
+        </button>
+      </div>
+      
+      <!-- Machine base -->
+      <div class="machine-base">
+        <div class="coin-slot">💰</div>
+      </div>
+    </div>
+    
+    <!-- Balance and back button -->
+    <div class="game-info">
+      <div class="balance-display">
+        <span class="balance-label">Balance:</span>
+        <span class="balance-amount">${{ (balance$ | async) ?? 0 }}</span>
+      </div>
+      
+      <a routerLink="/lobby" class="back-button">
+        🏠 Back to Lobby
+      </a>
+    </div>
+  </div>
+</div>

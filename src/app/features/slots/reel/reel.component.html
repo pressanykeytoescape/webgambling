@@ -1,0 +1,20 @@
+<div class="reel-3d" [class.spinning]="spinning || isAnimating" [style.animation-delay.ms]="reelIndex * 100">
+  <div class="reel-inner">
+    <div class="reel-symbols" [class.animate]="spinning || isAnimating">
+      <!-- Extended symbol list for smooth animation -->
+      <div class="symbol-row" *ngFor="let symbol of getExtendedSymbols(); let i = index" 
+           [class.highlight]="isWinningSymbol(symbol, i)">
+        <div class="symbol-content">{{ symbol }}</div>
+      </div>
+    </div>
+    
+    <!-- Reel frame overlay -->
+    <div class="reel-frame-overlay"></div>
+    
+    <!-- Winning line indicator -->
+    <div class="winning-line" *ngIf="isWinningReel"></div>
+  </div>
+  
+  <!-- Reel glow effect -->
+  <div class="reel-glow" [class.active]="spinning || isAnimating"></div>
+</div>
