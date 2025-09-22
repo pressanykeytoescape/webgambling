@@ -3,7 +3,7 @@ name: Build & Deploy Angular to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]     # ggf. anpassen
+    branches: [ "ws" ]     # ggf. anpassen
   workflow_dispatch:
 
 # Für Pages-Deploys nötig:
