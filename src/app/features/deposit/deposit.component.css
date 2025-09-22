@@ -1,0 +1,479 @@
+/* Sparkasse Web-Design */
+.spk-bg {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+.spk-header {
+  width: 100vw;
+  background: #e2001a;
+  padding: 0.5rem 0;
+  box-shadow: 0 2px 8px #e2001a22;
+}
+.spk-header-content {
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.spk-logo {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+.spk-header-title {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.spk-main {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 2.5rem;
+}
+.spk-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  border: 1px solid #f3d2d7;
+  padding: 2rem 2rem 1.5rem 2rem;
+  max-width: 420px;
+  width: 100%;
+}
+.spk-card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #e2001a;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+.spk-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.spk-form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.spk-label {
+  font-weight: 600;
+  color: #e2001a;
+  font-size: 1rem;
+}
+.spk-input {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: 1.5px solid #f3d2d7;
+  background: #f8fafc;
+  color: #222;
+  font-size: 1.1rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.spk-input:focus {
+  border-color: #e2001a;
+  box-shadow: 0 0 8px #e2001a33;
+}
+.spk-form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+.spk-btn {
+  background: #e2001a;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #e2001a22;
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.spk-btn:hover {
+  background: #b80015;
+}
+/* Popup Overlay Styles */
+.spk-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.spk-popup-modal {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px #e2001a33;
+  padding: 2rem 2.5rem;
+  min-width: 320px;
+  max-width: 90vw;
+  text-align: center;
+  animation: fade-in 0.3s;
+}
+.spk-popup-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #e2001a;
+  margin-bottom: 1rem;
+}
+.spk-popup-text {
+  color: #222;
+  margin-bottom: 1.5rem;
+}
+.spk-popup-btn {
+  margin-top: 0.5rem;
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 768px) {
+  .spk-header-content {
+    max-width: 98vw;
+    gap: 0.5rem;
+  }
+  .spk-logo {
+    height: 32px;
+  }
+  .spk-main {
+    padding-top: 1.2rem;
+  }
+  .spk-card {
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .spk-logo {
+    height: 24px;
+  }
+  .spk-header-title {
+    font-size: 1.1rem;
+  }
+  .spk-card {
+    padding: 0.5rem 0.2rem 0.5rem 0.2rem;
+  }
+  .spk-card-title {
+    font-size: 1rem;
+  }
+  .spk-input {
+    font-size: 1rem;
+    padding: 0.5rem 0.5rem;
+  }
+  .spk-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}
+/* Sparkasse Banking Design */
+.s-bg {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(120deg, #fff 0%, #f8fafc 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.s-center {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 1rem 2rem 1rem;
+}
+.s-logo-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+.s-logo-img {
+  height: 80px;
+  width: auto;
+  display: block;
+}
+.s-main-container {
+  width: 100%;
+}
+.s-titlebar {
+  background: #e2001a;
+  color: #fff;
+  border-radius: 8px 8px 0 0;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 8px #e2001a22;
+}
+.s-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+.s-card {
+  background: #fff;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  border: 1px solid #f3d2d7;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+}
+.s-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #e2001a;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+.s-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.s-form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.s-label {
+  font-weight: 600;
+  color: #e2001a;
+  font-size: 1rem;
+}
+.s-input {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: 1.5px solid #f3d2d7;
+  background: #f8fafc;
+  color: #222;
+  font-size: 1.1rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.s-input:focus {
+  border-color: #e2001a;
+  box-shadow: 0 0 8px #e2001a33;
+}
+.s-form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+.s-btn {
+  background: #e2001a;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #e2001a22;
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.s-btn:hover {
+  background: #b80015;
+}
+/* Popup Overlay Styles */
+.s-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.s-popup-modal {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px #e2001a33;
+  padding: 2rem 2.5rem;
+  min-width: 320px;
+  max-width: 90vw;
+  text-align: center;
+  animation: fade-in 0.3s;
+}
+.s-popup-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #e2001a;
+  margin-bottom: 1rem;
+}
+.s-popup-text {
+  color: #222;
+  margin-bottom: 1.5rem;
+}
+.s-popup-btn {
+  margin-top: 0.5rem;
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 768px) {
+  .s-logo-img {
+    height: 56px;
+  }
+  .s-center {
+    max-width: 98vw;
+    padding: 0 0.5rem 1rem 0.5rem;
+  }
+  .s-titlebar {
+    font-size: 1.2rem;
+    padding: 0.75rem 1rem;
+  }
+  .s-card {
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .s-logo-img {
+    height: 40px;
+  }
+  .s-center {
+    padding: 0 0.2rem 0.5rem 0.2rem;
+  }
+  .s-titlebar {
+    font-size: 1rem;
+    padding: 0.5rem 0.5rem;
+  }
+  .s-card {
+    padding: 0.5rem 0.2rem 0.5rem 0.2rem;
+  }
+  .s-card-title {
+    font-size: 1rem;
+  }
+  .s-input {
+    font-size: 1rem;
+    padding: 0.5rem 0.5rem;
+  }
+  .s-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}
+/* Sparkassen Logo Layout */
+.s-logo-header {
+  margin-bottom: 2.5rem;
+}
+.s-logo-img {
+  height: 64px;
+  width: auto;
+  display: block;
+  margin: 0 auto 0.5rem auto;
+}
+@media (max-width: 768px) {
+  .s-logo-img {
+    height: 48px;
+  }
+}
+/* Popup Overlay Styles */
+.s-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.s-popup-modal {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px #e2001a33;
+  padding: 2rem 2.5rem;
+  min-width: 320px;
+  max-width: 90vw;
+  text-align: center;
+  animation: fade-in 0.3s;
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Sparkassen Deposit Page Styles */
+.bank-bg {
+  background: linear-gradient(120deg, #fff 0%, #f8fafc 100%);
+}
+.bank-content {
+  z-index: 10;
+}
+.s-title {
+  color: #e2001a;
+}
+.s-subtitle {
+  color: #666;
+}
+.s-form {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  border: 1px solid #f3d2d7;
+}
+.form-label {
+  font-weight: 600;
+  color: #e2001a;
+}
+.form-input-s {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1.5px solid #f3d2d7;
+  background: #f8fafc;
+  color: #e2001a;
+  font-size: 1.1rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.form-input-s:focus {
+  border-color: #e2001a;
+  box-shadow: 0 0 8px #e2001a33;
+}
+.s-btn {
+  background: #e2001a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #e2001a22;
+  transition: background 0.2s;
+}
+.s-btn:hover {
+  background: #b80015;
+}
+.s-confirm {
+  background: #f8fafc;
+  border: 1.5px solid #f3d2d7;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #e2001a11;
+}
+@media (max-width: 768px) {
+  .s-title { font-size: 1.5rem; }
+  .bank-content { padding: 1rem; }
+  .s-form { padding: 1rem; }
+}
+@media (max-width: 480px) {
+  .s-title { font-size: 1.1rem; }
+  .bank-content { padding: 0.5rem; }
+  .s-form { padding: 0.5rem; }
+}
+/* Farbvariablen */
+.text-sred { color: #e2001a; }
+.bg-sred { background: #e2001a; }
+.bg-sred-dark { background: #b80015; }

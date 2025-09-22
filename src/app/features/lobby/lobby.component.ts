@@ -20,10 +20,7 @@ export class LobbyComponent {
     this.settings$ = this.store.select(GameSelectors.selectSettings);
   }
 
-  deposit(): void {
-    // Deposit resets the balance to the default value
-    this.store.dispatch(GameActions.deposit({ amount: 1000 }));
-  }
+  // Deposit-Button ist jetzt ein Link zur Deposit-Seite
 
   toggleSettings(): void {
     this.showSettings = !this.showSettings;

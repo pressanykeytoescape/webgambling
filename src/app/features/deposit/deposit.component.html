@@ -1,0 +1,41 @@
+
+
+
+<div class="spk-bg">
+  <header class="spk-header">
+    <div class="spk-header-content">
+      <img src="https://www.sparkasse-muensterland-ost.de/content/dam/myif/sk-muensterland-ost/work/bilder/nbf-logos/logo_rot.svg" alt="Sparkasse Logo" class="spk-logo" />
+      <span class="spk-header-title">Sparkasse</span>
+    </div>
+  </header>
+  <main class="spk-main">
+    <section class="spk-card">
+      <h1 class="spk-card-title">Online-Banking Einzahlung</h1>
+      <form class="spk-form" (ngSubmit)="onSubmit()" autocomplete="off">
+        <div class="spk-form-row">
+          <label for="iban" class="spk-label">IBAN</label>
+          <input id="iban" name="iban" type="text" class="spk-input" [(ngModel)]="iban" maxlength="22" placeholder="DE89 3704 0044 0532 0130 00" autocomplete="off" />
+        </div>
+        <div class="spk-form-row">
+          <label for="accountHolder" class="spk-label">Kontoinhaber</label>
+          <input id="accountHolder" name="accountHolder" type="text" class="spk-input" [(ngModel)]="accountHolder" placeholder="Max Mustermann" autocomplete="off" />
+        </div>
+        <div class="spk-form-row">
+          <label for="amount" class="spk-label">Betrag (€)</label>
+          <input id="amount" name="amount" type="number" class="spk-input" [(ngModel)]="amount" required min="10" max="10000" placeholder="100" autocomplete="off" />
+        </div>
+        <div class="spk-form-actions">
+          <button type="submit" class="spk-btn">Einzahlen</button>
+        </div>
+      </form>
+    </section>
+    <div *ngIf="confirmation" class="spk-popup-overlay">
+      <div class="spk-popup-modal">
+        <img src="https://www.sparkasse-muensterland-ost.de/content/dam/myif/sk-muensterland-ost/work/bilder/nbf-logos/logo_rot.svg" alt="Sparkasse Logo" class="spk-logo mb-2 mx-auto" />
+        <h2 class="spk-popup-title">Einzahlung erfolgreich!</h2>
+        <p class="spk-popup-text">€{{ amount }} wurden Ihrem Casino-Konto gutgeschrieben.</p>
+        <button class="spk-btn spk-popup-btn" (click)="goToLobby()">Zurück zur Lobby</button>
+      </div>
+    </div>
+  </main>
+</div>

@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'slots', loadChildren: () => import('./features/slots/slots.module').then((m) => m.SlotsModule) },
   { path: 'blackjack', loadChildren: () => import('./features/blackjack/blackjack.module').then((m) => m.BlackjackModule) },
   { path: 'roulette', loadChildren: () => import('./features/roulette/roulette.module').then((m) => m.RouletteModule) },
+  { path: 'deposit', loadChildren: () => import('./features/deposit/deposit.module').then((m) => m.DepositModule) },
   { path: '**', redirectTo: 'lobby' }
 ];
 
