@@ -97,5 +97,8 @@
       }
     }
   },
-  "defaultProject": "fun-casino"
+  "defaultProject": "fun-casino",
+  "cli": {
+    "analytics": false
+  }
 }

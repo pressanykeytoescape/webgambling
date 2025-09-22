@@ -3,296 +3,228 @@
 /* Animated particles background */
 .particle {
   position: absolute;
-  width: 4px;
-  height: 4px;
-  background: radial-gradient(circle, #ffd700, #ffed4e);
-  border-radius: 50%;
-  animation: float 6s ease-in-out infinite;
-  box-shadow: 0 0 10px #ffd700;
-}
 
-@keyframes float {
-  0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(-10px) rotate(360deg); opacity: 0; }
-}
-
-/* Casino lights border animation */
-.casino-lights {
-  border: 4px solid transparent;
-  background: linear-gradient(45deg, #ff0080, #ff8c00, #40e0d0, #ff0080) border-box;
-  animation: casino-border 3s linear infinite;
-}
-
-@keyframes casino-border {
-  0% { filter: hue-rotate(0deg) brightness(1); }
-  50% { filter: hue-rotate(180deg) brightness(1.5); }
-  100% { filter: hue-rotate(360deg) brightness(1); }
-}
-
-/* Neon text effects */
-.neon-text {
-  color: #fff;
-  text-shadow: 
-    0 0 5px #fff,
-    0 0 10px #fff,
-    0 0 15px #ff0080,
-    0 0 20px #ff0080,
-    0 0 35px #ff0080,
-    0 0 40px #ff0080;
-  animation: neon-flicker 2s ease-in-out infinite alternate;
-}
-
-@keyframes neon-flicker {
-  0%, 100% {
-    text-shadow: 
-      0 0 5px #fff,
-      0 0 10px #fff,
-      0 0 15px #ff0080,
-      0 0 20px #ff0080,
-      0 0 35px #ff0080,
-      0 0 40px #ff0080;
+  @keyframes float {
+    0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-10px) rotate(360deg); opacity: 0; }
   }
-  50% {
-    text-shadow: 
-      0 0 2px #fff,
-      0 0 5px #fff,
-      0 0 8px #ff0080,
-      0 0 12px #ff0080,
-      0 0 18px #ff0080,
-      0 0 25px #ff0080;
+
+  /* --- Ultra Modern Lobby Styles --- */
+
+  .lobby-bg {
+    background: radial-gradient(ellipse at 60% 40%, #232b3a 0%, #18181b 100%);
   }
-}
-
-.neon-subtitle {
-  text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffd700;
-}
-
-/* Casino chip design */
-.casino-chip {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: conic-gradient(from 0deg, #1a1a1a, #333, #666, #333, #1a1a1a);
-  border: 8px solid #ffd700;
-  box-shadow: 
-    0 0 20px rgba(255, 215, 0, 0.5),
-    inset 0 0 20px rgba(0, 0, 0, 0.5);
-  animation: chip-rotate 10s linear infinite;
-}
-
-.chip-inner {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: radial-gradient(circle, #2a2a2a 30%, #1a1a1a 70%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 4px solid #444;
-}
-
-@keyframes chip-rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Game cards with 3D effects */
-.game-card {
-  position: relative;
-  display: block;
-  padding: 2rem;
-  background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
-  border-radius: 20px;
-  border: 2px solid transparent;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  overflow: hidden;
-}
-
-.game-card:hover {
-  transform: translateY(-10px) rotateX(5deg);
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.3),
-    0 0 30px rgba(255, 215, 0, 0.2);
-}
-
-.card-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-}
-
-.card-glow {
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, #ff0080, #ff8c00, #40e0d0, #ff0080);
-  border-radius: 20px;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  animation: glow-rotate 3s linear infinite;
-}
-
-.game-card:hover .card-glow {
-  opacity: 1;
-}
-
-@keyframes glow-rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Specific card themes */
-.slots-card:hover {
-  border-color: #3b82f6;
-  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
-}
-
-.blackjack-card:hover {
-  border-color: #10b981;
-  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3);
-}
-
-.roulette-card:hover {
-  border-color: #ef4444;
-  box-shadow: 0 20px 40px rgba(239, 68, 68, 0.3);
-}
-
-.deposit-card:hover {
-  border-color: #f59e0b;
-  box-shadow: 0 20px 40px rgba(245, 158, 11, 0.3);
-}
-
-/* Settings button and panel */
-.settings-btn {
-  background: linear-gradient(45deg, #1a1a1a, #333);
-  border: 2px solid #ffd700;
-  transition: all 0.3s ease;
-}
-
-.settings-btn:hover {
-  background: linear-gradient(45deg, #333, #555);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-  transform: scale(1.05);
-}
-
-.neon-border {
-  box-shadow: 
-    0 0 5px #ffd700,
-    0 0 10px #ffd700,
-    0 0 15px #ffd700;
-}
-
-.settings-panel {
-  animation: slide-up 0.3s ease-out;
-}
-
-@keyframes slide-up {
-  from {
+  .lobby-glass {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(0,255,255,0.08) 0%, rgba(255,0,255,0.08) 100%);
+    backdrop-filter: blur(16px) brightness(1.1);
+    z-index: 1;
+  }
+  .lobby-neon {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-radial-gradient(circle at 50% 50%, #00fff7 0px, #00fff7 2px, transparent 3px, transparent 100px), repeating-radial-gradient(circle at 80% 20%, #ff00ea 0px, #ff00ea 2px, transparent 3px, transparent 100px);
+    opacity: 0.15;
+    z-index: 2;
+  }
+  .lobby-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .lobby-particle {
+    position: absolute;
+    top: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00fff7, #ff00ea);
+    box-shadow: 0 0 16px #00fff7, 0 0 32px #ff00ea;
+    animation: lobby-particle-float 7s ease-in-out infinite;
+  }
+  @keyframes lobby-particle-float {
+    0% { top: 100vh; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: -10px; opacity: 0; }
+  }
+  .lobby-content {
+    z-index: 10;
+  }
+  .lobby-title .lobby-neon-text {
+    color: #fff;
+    text-shadow: 0 0 12px #00fff7, 0 0 24px #ff00ea, 0 0 48px #00fff7;
+    animation: lobby-neon-flicker 2s infinite alternate;
+  }
+  @keyframes lobby-neon-flicker {
+    0%, 100% { opacity: 1; text-shadow: 0 0 12px #00fff7, 0 0 24px #ff00ea, 0 0 48px #00fff7; }
+    50% { opacity: 0.85; text-shadow: 0 0 6px #00fff7, 0 0 12px #ff00ea, 0 0 24px #00fff7; }
+  }
+  .lobby-neon-subtitle {
+    text-shadow: 0 0 8px #00fff7, 0 0 16px #ff00ea;
+  }
+  .glass-card {
+    background: rgba(255,255,255,0.08);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18), 0 0 0 2px rgba(0,255,255,0.08);
+    backdrop-filter: blur(8px) brightness(1.05);
+    border: 1.5px solid rgba(0,255,255,0.18);
+    transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s;
+  }
+  .glass-card:hover {
+    box-shadow: 0 16px 48px rgba(0,255,255,0.18), 0 0 0 4px #ff00ea44;
+    border-color: #ff00ea;
+    transform: scale(1.03) translateY(-4px);
+  }
+  .lobby-balance-card {
+    min-width: 220px;
+    min-height: 100px;
+    padding: 2rem 1.5rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .lobby-features {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+    padding: 1.5rem 1rem;
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    transition: box-shadow 0.3s, transform 0.3s;
+    position: relative;
+  }
+  .feature-card:hover {
+    box-shadow: 0 8px 32px #00fff7aa, 0 0 0 4px #ff00ea44;
+    transform: scale(1.05) translateY(-6px);
+  }
+  .feature-icon {
+    filter: drop-shadow(0 0 8px #00fff7) drop-shadow(0 0 16px #ff00ea);
+  }
+  .feature-title {
+    letter-spacing: 0.05em;
+  }
+  .feature-desc {
+    font-size: 1rem;
+    opacity: 0.85;
+  }
+  .slots-feature:hover .feature-icon {
+    filter: drop-shadow(0 0 16px #3b82f6);
+  }
+  .blackjack-feature:hover .feature-icon {
+    filter: drop-shadow(0 0 16px #10b981);
+  }
+  .roulette-feature:hover .feature-icon {
+    filter: drop-shadow(0 0 16px #ef4444);
+  }
+  .deposit-feature:hover .feature-icon {
+    filter: drop-shadow(0 0 16px #f59e0b);
+  }
+  .lobby-settings-btn {
+    background: rgba(0,255,255,0.08);
+    border: 1.5px solid #00fff7;
+    box-shadow: 0 2px 12px #00fff744;
+  }
+  .lobby-settings-btn:hover {
+    background: rgba(255,0,255,0.12);
+    border-color: #ff00ea;
+    color: #fff;
+  }
+  .lobby-settings-panel {
+    background: rgba(0,0,0,0.7);
+    border-radius: 18px;
+    box-shadow: 0 2px 16px #00fff744;
+    border: 1.5px solid #00fff7;
+  }
+  .setting-item {
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    padding: 1rem;
+    border: 1px solid rgba(0,255,255,0.12);
+  }
+  .setting-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .toggle-switch {
+    position: relative;
+    width: 60px;
+    height: 30px;
+  }
+  .toggle-input {
     opacity: 0;
-    transform: translateY(20px);
+    width: 0;
+    height: 0;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #222;
+    border: 2px solid #00fff7;
+    border-radius: 30px;
+    transition: all 0.3s ease;
   }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.3s ease-out;
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Setting items */
-.setting-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 215, 0, 0.3);
-}
-
-.setting-label {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #fff;
-}
-
-/* Custom toggle switches */
-.toggle-switch {
-  position: relative;
-  width: 60px;
-  height: 30px;
-}
-
-.toggle-input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.toggle-slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #333;
-  border: 2px solid #666;
-  border-radius: 30px;
-  transition: all 0.3s ease;
-}
-
-.toggle-slider:before {
-  position: absolute;
-  content: "";
-  height: 22px;
-  width: 22px;
-  left: 2px;
-  bottom: 2px;
-  background: linear-gradient(45deg, #ff0080, #ff8c00);
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.toggle-input:checked + .toggle-slider {
-  background: #ffd700;
-  border-color: #ffed4e;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-}
-
-.toggle-input:checked + .toggle-slider:before {
-  transform: translateX(30px);
-  background: linear-gradient(45deg, #00ff80, #40e0d0);
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .neon-text {
-    font-size: 3rem;
+  .toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 2px;
+    bottom: 2px;
+    background: linear-gradient(45deg, #00fff7, #ff00ea);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   }
-  
-  .casino-chip {
-    width: 150px;
-    height: 150px;
+  .toggle-input:checked + .toggle-slider {
+    background: #ff00ea;
+    border-color: #00fff7;
+    box-shadow: 0 0 10px #ff00ea44;
   }
-  
-  .game-card {
-    padding: 1.5rem;
+  .toggle-input:checked + .toggle-slider:before {
+    transform: translateX(30px);
+    background: linear-gradient(45deg, #00fff7, #ff00ea);
   }
-}
+  .lobby-atmo {
+    margin-top: 2rem;
+  }
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .lobby-content { max-width: 98vw; }
+    .lobby-features { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .lobby-title .lobby-neon-text { font-size: 2.5rem; }
+    .lobby-content { padding: 1rem; }
+    .lobby-features { grid-template-columns: 1fr; gap: 1.5rem; }
+    .feature-card { min-height: 120px; padding: 1rem; }
+  }
+  @media (max-width: 480px) {
+    .lobby-title .lobby-neon-text { font-size: 1.5rem; }
+    .lobby-content { padding: 0.5rem; }
+    .lobby-balance-card { min-width: 120px; padding: 1rem 0.5rem; }
+    .feature-card { min-height: 80px; padding: 0.5rem; }
+  }
+  }
+  @media (max-width: 480px) {
+    .lobby-title .lobby-neon-text { font-size: 1.5rem; }
+    .lobby-content { padding: 0.5rem; }
+    .lobby-balance-card { min-width: 120px; padding: 1rem 0.5rem; }
+    .feature-card { min-height: 80px; padding: 0.5rem; }
+  }

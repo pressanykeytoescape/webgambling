@@ -1,121 +1,77 @@
-<div class="min-h-screen bg-gradient-to-br from-purple-900 via-red-900 to-yellow-900 relative overflow-hidden">
-  <!-- Animated background particles -->
-  <div class="absolute inset-0 overflow-hidden">
-    <div class="particle" *ngFor="let i of [].constructor(20); let idx = index" 
-         [style.left.%]="(idx * 5) % 100" 
-         [style.animation-delay.s]="idx * 0.5">
+
+<div class="lobby-bg min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden">
+  <!-- Animated glassmorphism background -->
+  <div class="absolute inset-0 z-0">
+    <div class="lobby-glass"></div>
+    <div class="lobby-neon"></div>
+    <div class="lobby-particles">
+      <div *ngFor="let i of [].constructor(30); let idx = index" class="lobby-particle" [style.left.%]="(idx * 3.3) % 100" [style.animation-delay.s]="idx * 0.3"></div>
     </div>
   </div>
-  
-  <!-- Casino lights border -->
-  <div class="casino-lights absolute inset-0 pointer-events-none"></div>
-  
-  <div class="container mx-auto py-8 px-4 flex flex-col items-center space-y-8 relative z-10">
-    <!-- Neon casino title -->
-    <div class="text-center mb-8">
-      <h1 class="neon-text text-6xl font-bold mb-4 animate-pulse">🎰 FUN CASINO 🎰</h1>
-      <div class="neon-subtitle text-xl text-yellow-300 animate-bounce">✨ Where Dreams Come True ✨</div>
+
+  <div class="lobby-content relative z-10 w-full max-w-4xl px-4 py-10 flex flex-col items-center">
+    <!-- Casino Title -->
+    <div class="lobby-title text-center mb-10">
+      <h1 class="lobby-neon-text text-5xl md:text-7xl font-extrabold mb-2">🎰 FUN CASINO</h1>
+      <div class="lobby-neon-subtitle text-xl md:text-2xl text-cyan-300">Where Dreams Come True</div>
     </div>
 
-    <!-- Balance display with casino chip design -->
-    <div class="casino-chip relative">
-      <div class="chip-inner">
-        <div class="text-center">
-          <p class="text-lg font-semibold text-yellow-300">Balance</p>
-          <p class="text-4xl font-bold text-white font-mono" aria-live="polite">
-            ${{ (balance$ | async) ?? 0 }}
-          </p>
-        </div>
-      </div>
+    <!-- Balance Glass Card -->
+    <div class="lobby-balance-card glass-card mb-8 flex flex-col items-center justify-center">
+      <span class="text-lg font-semibold text-cyan-300">Balance</span>
+      <span class="text-4xl md:text-5xl font-mono font-bold text-white mt-2" aria-live="polite">${{ (balance$ | async) ?? 0 }}</span>
     </div>
 
-    <!-- Game selection with 3D cards -->
-    <div class="grid grid-cols-2 gap-6 w-full max-w-2xl">
-      <a routerLink="/slots" class="game-card slots-card group">
-        <div class="card-content">
-          <div class="text-6xl mb-4 group-hover:animate-spin">🎰</div>
-          <h3 class="text-2xl font-bold text-white mb-2">SLOTS</h3>
-          <p class="text-yellow-300">Spin to Win!</p>
-        </div>
-        <div class="card-glow"></div>
+    <!-- Feature Cards -->
+    <div class="lobby-features grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full">
+      <a routerLink="/slots" class="feature-card group glass-card slots-feature">
+        <div class="feature-icon text-5xl mb-3 group-hover:scale-110 transition-transform">🎰</div>
+        <div class="feature-title text-xl font-bold text-white mb-1">Slots</div>
+        <div class="feature-desc text-cyan-300">Spin to Win!</div>
       </a>
-      
-      <a routerLink="/blackjack" class="game-card blackjack-card group">
-        <div class="card-content">
-          <div class="text-6xl mb-4 group-hover:animate-bounce">🃏</div>
-          <h3 class="text-2xl font-bold text-white mb-2">BLACKJACK</h3>
-          <p class="text-green-300">Beat the Dealer!</p>
-        </div>
-        <div class="card-glow"></div>
+      <a routerLink="/blackjack" class="feature-card group glass-card blackjack-feature">
+        <div class="feature-icon text-5xl mb-3 group-hover:scale-110 transition-transform">🃏</div>
+        <div class="feature-title text-xl font-bold text-white mb-1">Blackjack</div>
+        <div class="feature-desc text-green-300">Beat the Dealer!</div>
       </a>
-      
-      <a routerLink="/roulette" class="game-card roulette-card group">
-        <div class="card-content">
-          <div class="text-6xl mb-4 group-hover:animate-spin">🎡</div>
-          <h3 class="text-2xl font-bold text-white mb-2">ROULETTE</h3>
-          <p class="text-red-300">Place Your Bets!</p>
-        </div>
-        <div class="card-glow"></div>
+      <a routerLink="/roulette" class="feature-card group glass-card roulette-feature">
+        <div class="feature-icon text-5xl mb-3 group-hover:scale-110 transition-transform">🎡</div>
+        <div class="feature-title text-xl font-bold text-white mb-1">Roulette</div>
+        <div class="feature-desc text-pink-300">Place Your Bets!</div>
       </a>
-      
-      <button (click)="deposit()" class="game-card deposit-card group">
-        <div class="card-content">
-          <div class="text-6xl mb-4 group-hover:animate-pulse">💰</div>
-          <h3 class="text-2xl font-bold text-white mb-2">DEPOSIT</h3>
-          <p class="text-yellow-300">Add Funds!</p>
-        </div>
-        <div class="card-glow"></div>
+      <button (click)="deposit()" class="feature-card group glass-card deposit-feature">
+        <div class="feature-icon text-5xl mb-3 group-hover:scale-110 transition-transform">💰</div>
+        <div class="feature-title text-xl font-bold text-white mb-1">Deposit</div>
+        <div class="feature-desc text-yellow-300">Add Funds!</div>
       </button>
     </div>
 
-    <!-- Settings panel with casino style -->
-    <button
-      (click)="toggleSettings()"
-      class="settings-btn neon-border px-6 py-3 rounded-full text-yellow-300 hover:text-white transition-all duration-300"
-      [attr.aria-expanded]="showSettings"
-    >
+    <!-- Settings Glass Card -->
+    <button (click)="toggleSettings()" class="lobby-settings-btn glass-card mt-10 px-8 py-3 text-cyan-300 font-bold rounded-full shadow-lg hover:text-white transition-all duration-300" [attr.aria-expanded]="showSettings">
       ⚙️ Settings
     </button>
 
-    <div
-      *ngIf="showSettings"
-      class="settings-panel bg-black/90 backdrop-blur-sm border-2 border-yellow-500 rounded-xl p-6 w-full max-w-md space-y-6 animate-fade-in"
-      aria-labelledby="settings-title"
-    >
-      <h2 id="settings-title" class="text-2xl font-bold text-yellow-300 text-center">🎮 Settings</h2>
-      
-      <div class="setting-item">
-        <label for="soundToggle" class="setting-label">🔊 Sound Effects</label>
+    <div *ngIf="showSettings" class="lobby-settings-panel glass-card mt-4 p-6 w-full max-w-md space-y-6 animate-fade-in" aria-labelledby="settings-title">
+      <h2 id="settings-title" class="text-2xl font-bold text-cyan-300 text-center mb-4">Settings</h2>
+      <div class="setting-item flex justify-between items-center">
+        <label for="soundToggle" class="setting-label text-white">🔊 Sound Effects</label>
         <div class="toggle-switch">
-          <input
-            id="soundToggle"
-            type="checkbox"
-            [checked]="(settings$ | async)?.sound"
-            (change)="onSoundToggle($event)"
-            class="toggle-input"
-          />
+          <input id="soundToggle" type="checkbox" [checked]="(settings$ | async)?.sound" (change)="onSoundToggle($event)" class="toggle-input" />
           <span class="toggle-slider"></span>
         </div>
       </div>
-      
-      <div class="setting-item">
-        <label for="animToggle" class="setting-label">✨ Animations</label>
+      <div class="setting-item flex justify-between items-center">
+        <label for="animToggle" class="setting-label text-white">✨ Animations</label>
         <div class="toggle-switch">
-          <input
-            id="animToggle"
-            type="checkbox"
-            [checked]="(settings$ | async)?.animations"
-            (change)="onAnimationToggle($event)"
-            class="toggle-input"
-          />
+          <input id="animToggle" type="checkbox" [checked]="(settings$ | async)?.animations" (change)="onAnimationToggle($event)" class="toggle-input" />
           <span class="toggle-slider"></span>
         </div>
       </div>
     </div>
-    
+
     <!-- Casino atmosphere text -->
-    <div class="text-center mt-8">
-      <p class="text-lg text-yellow-300 animate-pulse">🍀 Good Luck & Have Fun! 🍀</p>
+    <div class="lobby-atmo text-center mt-10">
+      <p class="text-lg text-cyan-300 animate-pulse">🍀 Good Luck & Have Fun! 🍀</p>
     </div>
   </div>
 </div>
