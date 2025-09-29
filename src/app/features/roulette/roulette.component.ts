@@ -1,3 +1,4 @@
+// ...existing code...
 import { Component, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Actions, ofType } from '@ngrx/effects';
@@ -13,9 +14,15 @@ import * as GameActions from '../../core/state/game.actions';
   styleUrls: ['./roulette.component.css']
 })
 export class RouletteComponent implements OnDestroy {
+  currentBalance: number = 0;
+  allIn(balance: number): void {
+    if (this.spinning) return;
+    this.bet = Math.max(this.minBet, balance);
+    this.spin();
+  }
   bet = 10;
   minBet = 1;
-  maxBet = 100;
+  maxBet = 100; // Wird nicht mehr als Limit verwendet, bleibt für UI/Info
   betType: string = 'color';
   betValue: number | string = 'red';
   balance$ = this.store.select(GameSelectors.selectBalance);
@@ -84,8 +91,8 @@ export class RouletteComponent implements OnDestroy {
 
   spin(): void {
     if (this.spinning) return;
-    const betAmount = Math.max(this.minBet, Math.min(this.maxBet, this.bet));
-    this.bet = betAmount;
+  const betAmount = Math.max(this.minBet, this.bet);
+  this.bet = betAmount;
     this.spinning = true;
     this.ballLanded = false;
     this.winningNumber = null;
@@ -128,9 +135,7 @@ export class RouletteComponent implements OnDestroy {
   }
 
   increaseBet(): void {
-    if (this.bet < this.maxBet) {
-      this.bet = Math.min(this.maxBet, this.bet + 1);
-    }
+    this.bet = this.bet + 1;
   }
 
   clearBets(): void {
@@ -154,5 +159,10 @@ export class RouletteComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
+  }
+
+  // Balance abonnieren
+  ngOnInit(): void {
+    this.balance$.subscribe(bal => this.currentBalance = bal);
   }
 }

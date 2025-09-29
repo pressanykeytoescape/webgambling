@@ -141,19 +141,19 @@
                 [disabled]="spinning || bet <= minBet">
           -
         </button>
-        <input class="bet-input-roulette" 
-               [(ngModel)]="bet" 
-               [min]="minBet" 
-               [max]="maxBet" 
-               type="number"
-               [disabled]="spinning">
-        <button class="bet-btn-roulette" 
-                (click)="increaseBet()" 
-                [disabled]="spinning || bet >= maxBet">
-          +
-        </button>
+  <input class="bet-input-roulette" 
+         [(ngModel)]="bet" 
+         [min]="minBet" 
+         type="number"
+         [disabled]="spinning">
+  <button class="bet-btn-roulette" 
+    (click)="increaseBet()" 
+    [disabled]="spinning">
+    +
+  </button>
       </div>
     </div>
+
 
     <!-- Spin button -->
     <button class="spin-btn-roulette" 
@@ -162,6 +162,14 @@
             (click)="spin()">
       <div class="btn-icon-roulette">🎯</div>
       <div class="btn-text-roulette">{{ spinning ? 'SPINNING...' : 'SPIN' }}</div>
+    </button>
+
+    <!-- All-In button -->
+  <button class="allin-btn-roulette"
+      [disabled]="spinning || !currentBalance || !betType"
+      (click)="allIn(currentBalance)">
+      <div class="btn-icon-roulette">💸</div>
+      <div class="btn-text-roulette">ALL IN</div>
     </button>
 
     <!-- Clear bets -->
