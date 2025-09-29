@@ -28,10 +28,9 @@ export class ReelComponent implements OnChanges {
   }
 
   getExtendedSymbols(): string[] {
-    // Create extended symbol list for smooth spinning animation
-    const allSymbols = ['🍒', '🍋', '🔔', '⭐', '7', '💎', '🍇', '🍊'];
-    const extended = [...allSymbols, ...this.symbols, ...allSymbols];
-    return extended;
+    // Verwende nur die Symbole der aktuellen Runde für die Animation
+    // (optional: für Animation kann man die aktuelle Spalte mehrfach aneinanderhängen)
+    return [...this.symbols, ...this.symbols, ...this.symbols];
   }
 
   isWinningSymbol(symbol: string, index: number): boolean {
