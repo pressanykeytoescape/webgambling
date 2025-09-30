@@ -10,7 +10,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [RouletteComponent],
-  imports: [CommonModule, FormsModule, RouterModule.forChild(routes)],
+  declarations: [],
+  imports: [CommonModule, FormsModule, RouterModule.forChild(routes), RouletteComponent],
 })
 export class RouletteModule {}
