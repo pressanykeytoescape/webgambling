@@ -3,66 +3,31 @@ name: Build & Deploy Angular to GitHub Pages
 
 on:
   push:
-    branches: [ "ws" ]     # ggf. anpassen
+    branches: [ "ws" ]     # Workflow startet bei Push auf ws
   workflow_dispatch:
 
-# Für Pages-Deploys nötig:
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Verhindert parallele Pages-Deploys
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
-env:
-  # Passe das an: Angular 17+ legt i.d.R. nach dist/<app>/browser ab.
-  # Trage hier deinen App-Ordnernamen ein (aus angular.json -> "defaultProject")
-  NG_APP_NAME: webgambling
-  # Für Project Pages:
-  BASE_HREF: "/webgambling/"   # bei Custom Domain oder user.github.io: "/"
-
 jobs:
-  build:
-    name: Build
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'    # LTS; ggf. auf deine Version anpassen
+          node-version: '20'
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm ci
 
-      # Falls dein package.json kein "ng" Script hat, ersetze durch:
-      # run: npx ng build --configuration production --base-href "${{ env.BASE_HREF }}"
       - name: Build Angular (production)
-        run: |
-          npm run build -- --configuration=production --base-href "${{ env.BASE_HREF }}"
-          # Optional (wenn benötigt): --deploy-url "${{ env.BASE_HREF }}"
+        run: npm run build -- --configuration=production --base-href "/webgambling/"
 
-      # Upload des fertigen Build-Ordners als Pages-Artifact
-      - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist/${{ env.NG_APP_NAME }}/browser
-          # Falls dein Output-Pfad anders ist, hier anpassen.
-
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4  
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages              # Ziel-Branch für Pages
+          folder: dist/webgambling/browser  # Output-Ordner aus angular.json
+          token: ${{ secrets.GITHUB_TOKEN }}
